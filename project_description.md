@@ -2,22 +2,24 @@ When I read the book "Why Americans Hate Welfare" back in college, it had a deep
 
 "Why Americans Hate Welfare" is not a complicated book compared to a lot of social science published in academic journals. Every chapter presents a handful of charts and tables. They often summarize public opinion polling from a multitude of sources. (One chapter rellies heavily on data collected by the author as he reviewed newspaper, magazing, and TV images from stories about poverty.) When the analyses use regressions or more complicated models, the details are placed in appendices. The effect makes for compelling reading.
 
-The book came out in 1999, which was just after the 1997 welfare reform act took effect. Gilens mentions the 1997 reform, but doesn't attempt to test if it had any significant effects on the trends he described. There just wasn't enough post-reform public opinion data to draw any useful conclusions at the time. However, the 1997 welfare reform act is only one of the myriad changes that took place in the past twenty years.
+The book came out in 1999, just after the [1996 welfare reform](https://en.wikipedia.org/wiki/Personal_Responsibility_and_Work_Opportunity_Act) act took effect. Gilens mentions welfare reform, but doesn't attempt to test if it had any significant effects on the trends he described. There simply wasn't enough post-reform data to draw any useful conclusions at the time. However, the 1996 welfare reform act is only one of the myriad changes that took place in the past twenty years. Condsider the events since 1999:
 
 - post-9/11 economic recession
+- Afghanistan and Iraq wars
 - Katrina
 - housing boom
 - technologies such as cable news, Google, iPhone, Facebook
-- the decline of print media, broadcast news
+- the decline of print media and traditional broadcast news
 - housing market collapse
 - Great Recession
 - election of a black president
 - rise of the Tea Party
+- Black Lives Matter protests
 - multiple waves of immigration debates
-- changing demographic makeup of US and specifically US cities
-- life expectancy for white males is not good (Deaton)
+- election of Donald Trump, a political noephyte, to president
 
-Continuing socio-economic trends
+Also consider some new and continuing socio-economic trends since 1999:
+- changing demographic makeup of US and specifically US cities
 - continued de-industrialization (now automation)
 - increased number of jobs requiring college degrees
 - levelling off of racial integration in neighborhoods, schools, businesses, etc.
@@ -27,8 +29,9 @@ Continuing socio-economic trends
 - increase in for-profit colleges
 - decline in ratio of wages to housing costs
 - accelerated financialization and Wall-Street-ification of the economy
+- life expectancy for white males is not good (Deaton)
 
-Not to mention social policy changes
+Not to mention the federal policy changes since 1999. Notably missing from this list is any large-scale welfare policy changes, but many of these policies had the largest effect in the slice of the population usually thought of as welfare recipients:
 - Too big to fail for banks
 - No Child Left Behind
 - Medicare Part D
@@ -36,16 +39,11 @@ Not to mention social policy changes
 - extensions to unemployment insurance after the Great Recession
 - basically no changes to TANF
 - SNAP expanded during Great Recession but not because of policy changes
-- cuts in state and local government programs after 2009
+- cuts in state and local government social service programs after 2009
 
+With all of these things in mind I thought it would be a good idea to re-analyze the data from "Why Americans Hate Welfare." There are many ways to look at race, media, and welfare policy; Gilens isn't the only author or social scientist working on these topics. To keep this project within a managable scope, I'm not planning to develop any new arguments. I grant that Gilens basically got the argument correct back in 1999, and I want to see what, if anything, has changed since then.
 
-Further not mentioning
-- Afghanistan and Iraq wars (soldiers were disproportionately poor and PoC???)
-
-
-So with all of these things in mind I thought it would be a good idea to re-analyze the data and public opinion surveys from "Why Americans Hate Welfare."
-
-I am working on this as a side project from my 9 to 5 job as part of the #cnc2018 challenge. Besides doing some -- hopefully -- important social science, I want to use this as an opportunity to level up my own skills in data analysis and work-flow management. My previous work has often concentrated on building novel datasets or implementing very complicated statistical models (or both). I think this project is ideal because it is non-trivial, yet it will focus more on gathering a lot of existing data sources and analyzing them with more simple approaches. It should allow me to focus more on aspects of writing clean, reproducible code that can generate compelling data visualizations. Each visualization will feed in to the overall narative, which has already been described by the origianl book. So my plan for every graph and table that appears in "Why Americans Hate Welfare" will be some version of:
+I am working on this as a side project from my 9 to 5 as part of the #cnc2018 challenge. Besides doing some -- hopefully -- important social science, I want to use this as an opportunity to level up my own skills in data analysis and work-flow management. My previous work has often concentrated on building novel datasets or implementing very complicated statistical models (or both). I think this project is ideal because it is non-trivial, yet it will focus more on gathering a lot of existing data sources and analyzing them with more simple approaches. It should allow me to focus more on aspects of writing clean, reproducible code that can generate compelling data visualizations. Each visualization will feed in to the overall narative, which has already been described by the origianl book. So my plan for every graph and table that appears in "Why Americans Hate Welfare" will be some version of:
 
 1. Find the original data.
 2. Reproduce the figure as printed in the book.
