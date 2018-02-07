@@ -27,6 +27,6 @@ lodown("anes",
        your_email = "mattmoehr@hotmail.com"
        )
 
-anes <- readRDS("../data/anes/1992 Time Series Study/anes1992.rds")
+anes <- readRDS("./chapter8/figure8_1/original/data/anes/1992 Time Series Study/anes1992.rds")
 
-names(anes)
+head(anes)

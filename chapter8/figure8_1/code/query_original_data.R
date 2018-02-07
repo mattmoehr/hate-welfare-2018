@@ -1,5 +1,116 @@
 ## Matt Moehr
 ## 2018-01-31
 
-## Load the raw data (SPSS) and pull out the variables we need.
+require(tidyverse)
+
+anes <- readRDS("./chapter8/figure8_1/original/data/anes/1992 Time Series Study/anes1992.rds")
+
+
+ls(anes)
+
+
+## all criteria described in appendix A.12:
+
+## welfare increased/decreased: v923726
+  ## 0 = increase
+  ## 50 = maintain
+  ## 100 = decrease
+  ## ?? cut entirely
+  ## ?? dk/refused
+
+## unemploymen increased/decreased: v923816
+  ## 0 = increase
+  ## 50 = maintain
+  ## 100 = decrease
+  ## ?? cut entirely
+  ## ?? dk/refused
+
+## respondents race: v924202
+  ## white (1) respondents only
+  
+## blacks just need to try harder: v926128
+  ## 0 = strongly diagree
+  ## .25 = disagree somewhat
+  ## .50 = 
+  ## .75 = agree somewhat
+  ## 1 = strongly agree
+
+vars <- c('v923726',
+          'v923816',
+          'v924202',
+          'v926128'
+          )
+
+sapply(anes[,vars], table)
+
+anes_whites <- dplyr::filter(anes, v924202 == 1)
+
+sapply(anes_whites[, vars], table)
+
+anes_whites <-
+  mutate(
+    anes_whites,
+    welfare = case_when(
+      v923726 == 1 ~ 0,
+      v923726 == 2 ~ 50,
+      v923726 == 3 ~ 100,
+      v923726 == 7 ~ 100,
+      v923726 == 8 ~ NaN,
+      v923726 == 9 ~ NaN
+    )
+  )
+
+table(anes_whites$welfare, useNA = "always")
+
+
+anes_whites <-
+  mutate(
+    anes_whites,
+    unemploy = case_when(
+      v923816 == 1 ~ 0,
+      v923816 == 2 ~ 50,
+      v923816 == 3 ~ 100,
+      v923816 == 7 ~ 100,
+      v923816 == 8 ~ NaN,
+      v923816 == 9 ~ NaN
+    )
+  )
+
+table(anes_whites$unemploy, useNA = "always")
+
+
+anes_whites <-
+  mutate(
+    anes_whites,
+    try_harder = case_when(
+      v926128 == 1 ~ 0,
+      v926128 == 2 ~ .25,
+      v926128 == 3 ~ .5,
+      v926128 == 4 ~ .75,
+      v926128 == 5 ~ 1,
+      v926128 == 8 ~ NaN,
+      v926128 == 9 ~ NaN,
+      v926128 == 0 ~ NaN
+    )
+  )
+
+table(anes_whites$try_harder, useNA = "always")
+
+## run the models
+
+m_welfare <- lm(data = anes_whites,
+                formula = welfare ~ try_harder
+                )
+
+summary(m_welfare)
+
+m_unemploy <- lm(data = anes_whites,
+                 formula = unemploy ~ try_harder
+                 )
+
+summary(m_unemploy)
+
+## the DF in my data and the N reported by Gilens is off
+## a bit but everything else matches up so i consider it
+## good enough
 
