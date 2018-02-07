@@ -99,7 +99,7 @@ table(anes_whites$try_harder, useNA = "always")
 ## run the models
 
 m_welfare <- lm(data = anes_whites,
-                formula = welfare ~ try_harder
+                formula = welfare ~  try_harder
                 )
 
 summary(m_welfare)
@@ -114,3 +114,47 @@ summary(m_unemploy)
 ## a bit but everything else matches up so i consider it
 ## good enough
 
+anes_whites <-
+  mutate(
+    anes_whites,
+    cut_welfare = case_when(
+      welfare == 100 ~ 1,
+      welfare == NaN ~ NaN,
+      TRUE ~ 0
+    )
+  )
+
+mean(anes_whites$cut_welfare, by = )
+
+t_welfare <- aggregate(cut_welfare ~ try_harder,
+                       anes_whites,
+                       mean
+                       )
+str(t_welfare)
+
+plot(t_welfare$try_harder, 
+     t_welfare$cut_welfare,
+     ylim = c(0, 0.6),
+     type = "o"
+     )
+
+anes_whites <-
+  mutate(
+    anes_whites,
+    cut_unemploy = case_when(
+      unemploy == 100 ~ 1,
+      unemploy == NaN ~ NaN,
+      TRUE ~ 0
+    )
+  )
+
+t_unemploy <- aggregate(cut_unemploy ~ try_harder,
+                        anes_whites,
+                        mean
+                        )
+
+plot(t_unemploy$try_harder,
+     t_unemploy$cut_unemploy,
+     ylim = c(0, 0.6),
+     type = "o"
+     )
