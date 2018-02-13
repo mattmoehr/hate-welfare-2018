@@ -44,9 +44,9 @@ ls(anes)
   ## white (1) respondents only
   
 ## blacks just need to try harder: v926128
-  ## 0 = strongly diagree
+  ## 0 = strongly disagree
   ## .25 = disagree somewhat
-  ## .50 = 
+  ## .50 = neither agree or disagree
   ## .75 = agree somewhat
   ## 1 = strongly agree
 
@@ -178,7 +178,7 @@ str(t_welfare)
 
 plot(t_welfare$try_harder, 
      t_welfare$cut_welfare,
-     ylim = c(0, 0.6),
+     ylim = c(0, 0.65),
      type = "o"
      )
 
@@ -199,27 +199,32 @@ t_unemploy <- aggregate(cut_unemploy ~ try_harder,
 
 plot(t_unemploy$try_harder,
      t_unemploy$cut_unemploy,
-     ylim = c(0, 0.6),
+     ylim = c(0, 0.65),
      type = "o"
      )
 
 
+## so very few people wanted to cut soc sec so move the cut
+## point up to maintain or cut
 anes_whites <-
   mutate(
     anes_whites,
-    cut_social_security = case_when(
-      social_security == 100 ~ 1,
+    main_or_cut_social_security = case_when(
+      social_security >= 50 ~ 1,
       social_security == NaN ~ NaN,
       TRUE ~ 0
     )
   )
 
-t_social_security <- aggregate(cut_social_security ~ try_harder,
+t_social_security <- aggregate(main_or_cut_social_security ~ try_harder,
                                anes_whites,
                                mean
                                )
 
+t_social_security
+
 plot(t_social_security$try_harder,
-     t_social_security$cut_social_security,
+     t_social_security$main_or_cut_social_security,
+     ylim = c(0, .65),
      type = "o"
      )
