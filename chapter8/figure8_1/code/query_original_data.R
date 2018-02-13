@@ -25,6 +25,21 @@ ls(anes)
   ## ?? cut entirely
   ## ?? dk/refused
 
+## it turns out that ANES dropped the unemploymet question
+## so i am going to swap in the social security question
+## it has a few advantages:
+  ## a) it is in the federal spedinding section like welfare and unemployment
+  ## b) it is presumbably not linked to racism (this was Gilens original
+  ##    modtivation for using the unemployment variable, i think.)
+  ## c) it's available in 1992 and 2016.
+
+## social security increased/decreased: v923811
+  ## 0 = increase
+  ## 50 = maintain
+  ## 100 = decrease
+  ## ?? cut entirely
+  ## ?? dk/refused
+
 ## respondents race: v924202
   ## white (1) respondents only
   
@@ -38,7 +53,8 @@ ls(anes)
 vars <- c('v923726',
           'v923816',
           'v924202',
-          'v926128'
+          'v926128',
+          'v923811'
           )
 
 sapply(anes[,vars], table)
@@ -78,6 +94,22 @@ anes_whites <-
 
 table(anes_whites$unemploy, useNA = "always")
 
+anes_whites <-
+  mutate(
+    anes_whites,
+    social_security = case_when(
+      v923811 == 1 ~ 0,
+      v923811 == 2 ~ 50,
+      v923811 == 3 ~ 100,
+      v923811 == 7 ~ 100,
+      v923811 == 8 ~ NaN,
+      v923811 == 9 ~ NaN
+    )
+  )
+
+table(anes_whites$social_security, useNA = "always")
+
+
 
 anes_whites <-
   mutate(
@@ -114,6 +146,19 @@ summary(m_unemploy)
 ## a bit but everything else matches up so i consider it
 ## good enough
 
+## here is an additional model for social security
+
+m_social_security <- lm(data = anes_whites,
+                        formula = social_security ~ try_harder
+                        )
+
+summary(m_social_security)
+
+## hm, the coef on try_harder is positive and significant
+## not sure what to make of that. whites are generous to
+## old black people?
+
+
 anes_whites <-
   mutate(
     anes_whites,
@@ -124,7 +169,6 @@ anes_whites <-
     )
   )
 
-mean(anes_whites$cut_welfare, by = )
 
 t_welfare <- aggregate(cut_welfare ~ try_harder,
                        anes_whites,
@@ -156,5 +200,26 @@ t_unemploy <- aggregate(cut_unemploy ~ try_harder,
 plot(t_unemploy$try_harder,
      t_unemploy$cut_unemploy,
      ylim = c(0, 0.6),
+     type = "o"
+     )
+
+
+anes_whites <-
+  mutate(
+    anes_whites,
+    cut_social_security = case_when(
+      social_security == 100 ~ 1,
+      social_security == NaN ~ NaN,
+      TRUE ~ 0
+    )
+  )
+
+t_social_security <- aggregate(cut_social_security ~ try_harder,
+                               anes_whites,
+                               mean
+                               )
+
+plot(t_social_security$try_harder,
+     t_social_security$cut_social_security,
      type = "o"
      )
