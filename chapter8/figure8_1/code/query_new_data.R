@@ -158,4 +158,20 @@ plot(t_social_security$try_harder,
      type = "o"
      )
 
+ggplot(data = t_social_security,
+       aes(x = try_harder,
+           y = main_or_cut_social_security
+           )
+       ) +
+  ylim(0, .75) +
+  geom_path(stat = "identity") +
+  geom_point(stat = "identity",
+             shape = 1,
+             size = 4
+             ) 
+  
+
+
+
+
 

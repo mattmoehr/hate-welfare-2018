@@ -11,6 +11,8 @@
 install.packages( "devtools" , repos = "http://cran.rstudio.com/" )
 library(devtools)
 
+devtools::use_travis()
+
 ## archive package is a real hassle
 ## on windows it failed to compile because it couldn't find my install
 ## of R Build Tools. on linux (Ubuntu) it is saying that it needs to have
